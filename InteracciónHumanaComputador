@@ -1,0 +1,425 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AntoCloset</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.9.1/font/bootstrap-icons.css">
+    <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/toastify-js/src/toastify.min.css">
+    <link rel="stylesheet" href="./css/main.css">
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Rubik:wght@300;400;500;600;700;800;900&display=swap');
+
+
+        .header {
+            display: flex;
+            align-items: center;
+            padding: 10px;
+            background-color: var(--clr-main);
+            color: var(--clr-white);
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+        }
+        
+
+        .header img {
+            height: 70px;
+            margin-right: 20px;
+        }
+
+        .menu {
+            margin-right: 20px;
+            cursor: pointer;
+            position: relative;
+        }
+
+        .menu:hover .submenu {
+            display: block;
+        }
+
+        .submenu {
+            display: none;
+            position: absolute;
+            top: 100%;
+            left: 0;
+            background-color: var(--clr-gray);
+            padding: 10px;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+            z-index: 1;
+        }
+
+        .search-bar {
+            flex-grow: 1;
+        }
+
+        .search-bar input {
+            width: 100%;
+            padding: 5px;
+            box-sizing: border-box;
+        }
+
+        .hello-message {
+            margin-right: 20px;
+        }
+
+        .cart {
+            margin-right: 20px;
+            cursor: pointer;
+        }
+
+        .carousel {
+            width: 100%;
+            overflow: hidden;
+            position: relative;
+            margin-top: 20px;
+        }
+
+        .carousel-images {
+            display: flex;
+            width: max-content;
+            animation: scroll 3000s linear infinite; /* Ajuste del tiempo de la animación */
+        }
+
+        .carousel img {
+            width: 100%;
+            max-height: 400px;
+            object-fit: cover;
+        }
+
+        @keyframes scroll {
+            0% {
+                transform: translateX(0);
+            }
+            100% {
+                transform: translateX(calc(-100% * 14)); /* Ajuste del número de imágenes */
+            }
+        }
+
+        .customer-reviews .review-card .stars {
+            color: gold;
+        }
+
+        .featured-products, .customer-reviews, .contact-section{
+            margin: 40px 20px;
+        }
+
+        .featured-products h2, .customer-reviews h2, .contact-section h2 {
+            text-align: center;
+            margin-bottom: 20px;
+            color: var(--clr-main);
+        }
+
+        .featured-products .product-card, .customer-reviews .review-card {
+            display: flex;
+            align-items: center;
+            margin-bottom: 20px;
+            padding: 10px;
+            border: 1px solid var(--clr-gray);
+            border-radius: 5px;
+            background-color: var(--clr-white);
+        }
+
+        .featured-products .product-card img, .customer-reviews .review-card img {
+            width: 100px;
+            height: 100px;
+            margin-right: 20px;
+            border-radius: 50%;
+            object-fit: cover;
+        }
+
+        .contact-section .contact-form {
+            max-width: 600px;
+            margin: 0 auto;
+            padding: 20px;
+            border: 1px solid var(--clr-gray);
+            border-radius: 5px;
+            background-color: var(--clr-white);
+        }
+
+        .contact-section .contact-form .form-group {
+            margin-bottom: 20px;
+        }
+
+        .contact-section .contact-form label {
+            display: block;
+            margin-bottom: 5px;
+            color: var(--clr-main);
+        }
+
+        .contact-section .contact-form input[type="text"],
+        .contact-section .contact-form input[type="email"],
+        .contact-section .contact-form textarea {
+            width: 100%;
+            padding: 10px;
+            border: 1px solid var(--clr-gray);
+            border-radius: 5px;
+            font-size: 16px;
+        }
+
+        .contact-section .contact-form textarea {
+            resize: vertical;
+            min-height: 100px;
+        }
+
+        .contact-section .contact-form button {
+            padding: 10px 20px;
+            background-color: var(--clr-main);
+            color: var(--clr-white);
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 16px;
+        }
+
+        .contact-section .contact-form button:hover {
+            background-color: var(--clr-red);
+        }
+
+    </style>
+</head>
+<body>
+    <div class="header">
+        <img src="img/logo.png" alt="Logo">
+        <div class="menu">
+            Menú
+            <div class="submenu">
+                <!-- Ajuste de las funciones onclick -->
+                <button class="btn btn-link" onclick="redirectToIndex('index')">Todos los productos</button>
+                <button class="btn btn-link" onclick="redirectToIndex('ropa')">Ropa</button>
+                <button class="btn btn-link" onclick="redirectToIndex('calzado')">Calzado</button>
+                <button class="btn btn-link" onclick="redirectToIndex('perfume')">Perfume</button>
+            </div>
+        </div>
+        <div class="search-bar">
+            <input type="text" id="search-input" class="form-control" placeholder="Buscar...">
+        </div>
+        <div class="hello-message"> Buscar </div>
+        <div class="cart">
+            <i class="fas fa-shopping-cart"></i>
+            Carrito <span id="numerito" class="badge badge-pill badge-danger">0</span>
+        </div>
+    </div>
+
+    <div class="carousel">
+        <div class="carousel-images" id="carouselImages">
+            <!-- Repetir las imágenes para efecto infinito -->
+            <img src="img/ropa1.jpg" alt="Producto 1">
+            <img src="img/ropa2.jpg" alt="Producto 2">
+            <img src="img/ropa3.jpg" alt="Producto 3">
+            <img src="img/calzado1.jpg" alt="Producto 4">
+            <img src="img/calzado2.jpg" alt="Producto 5">
+            <img src="img/perfume1.jpg" alt="Producto 1">
+            <img src="img/perfume2.jpg" alt="Producto 2">
+            <img src="img/ropa1.jpg" alt="Producto 1">
+            <img src="img/ropa2.jpg" alt="Producto 2">
+            <img src="img/ropa3.jpg" alt="Producto 3">
+            <img src="img/calzado1.jpg" alt="Producto 4">
+            <img src="img/calzado2.jpg" alt="Producto 5">
+            <img src="img/perfume1.jpg" alt="Producto 1">
+            <img src="img/perfume2.jpg" alt="Producto 2">
+            <!-- Duplicando las imágenes para el efecto infinito -->
+            <img src="img/ropa1.jpg" alt="Producto 1">
+            <img src="img/ropa2.jpg" alt="Producto 2">
+            <img src="img/ropa3.jpg" alt="Producto 3">
+            <img src="img/calzado1.jpg" alt="Producto 4">
+            <img src="img/calzado2.jpg" alt="Producto 5">
+            <img src="img/perfume1.jpg" alt="Producto 1">
+            <img src="img/perfume2.jpg" alt="Producto 2">
+            <img src="img/ropa1.jpg" alt="Producto 1">
+            <img src="img/ropa2.jpg" alt="Producto 2">
+            <img src="img/ropa3.jpg" alt="Producto 3">
+            <img src="img/calzado1.jpg" alt="Producto 4">
+            <img src="img/calzado2.jpg" alt="Producto 5">
+            <img src="img/perfume1.jpg" alt="Producto 1">
+            <img src="img/perfume2.jpg" alt="Producto 2">
+        </div>
+    </div>
+
+    <div class="featured-products">
+        <h2>Productos Destacados</h2>
+        <div class="product-card">
+            <img src="img/perfume2.jpg" alt="Producto 1">
+            <div>
+                <h3>PERFUME JEAN PAUL GAULTIER  200 ML</h3>
+                <p>Descripción breve del producto 1.</p>
+                <p>Precio: S/100</p>
+            </div>
+        </div>
+        <div class="product-card">
+            <img src="img/ropa2.jpg" alt="Producto 2">
+            <div>
+                <h3>CASACA HOMBRE SHERPA NEGRA LEVIS</h3>
+                <p>Descripción breve del producto 2.</p>
+                <p>Precio: S/150</p>
+            </div>
+        </div>
+        <div class="product-card">
+            <img src="img/calzado1.jpg" alt="Producto 3">
+            <div>
+                <h3>ZAPATILLAS URBANAS REEBOK</h3>
+                <p>Descripción breve del producto 3.</p>
+                <p>Precio: S/200</p>
+            </div>
+        </div>
+    </div>
+
+
+     <!-- Modal -->
+     <div class="modal fade" id="warningModal" tabindex="-1" aria-labelledby="warningModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered">
+          <div class="modal-content">
+            <div class="modal-header">
+              <h5 class="modal-title" id="warningModalLabel">Recomendaciones para una compra segura</h5>
+              <button type="button" class="close" data-dismiss="modal" aria-label="Cerrar">
+                <span aria-hidden="true">&times;</span>
+              </button>
+            </div>
+            <div class="modal-body">
+              <p>Utilize contraseñas seguras y evite reutilizarlas en diferentes plataformas.</p>
+              <p>Realice sus compras en redes Wi-Fi seguras.</p>
+              <p>Revise cuidadosamente los detalles de su pedido antes de confirmarlo.</p>
+              <p>En caso de dudas o problemas, contacte con el servicio de atención al cliente.</p>
+            </div>
+            <div class="modal-footer">
+              <button type="button" class="btn btn-primary" data-dismiss="modal">Entendido</button>
+            </div>
+          </div>
+        </div>
+      </div>
+  
+      <!-- jQuery -->
+      <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+  
+      <!-- Bootstrap JS -->
+      <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.2/dist/umd/popper.min.js"></script>
+      <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+  
+      <!-- Script para mostrar el modal -->
+      <script>
+        $(document).ready(function(){
+          $('#warningModal').modal('show');
+        });
+      </script>
+  </body>
+  </html>
+
+
+
+
+    <div class="customer-reviews">
+        <h2>Opiniones de Clientes</h2>
+        <div class="review-card">
+            <img src="img/cliente1.jpg" alt="Cliente 1">
+            <div>
+                <h3>Camila León</h3>
+                <p>Excelente producto, muy recomendado.</p>
+                <div class="stars">
+                    <i class="fas fa-star"></i>
+                    <i class="fas fa-star"></i>
+                    <i class="fas fa-star"></i>
+                    <i class="fas fa-star"></i>
+                    <i class="far fa-star"></i>
+                </div>
+            </div>
+        </div>
+        <div class="review-card">
+            <img src="img/cliente2.jpg" alt="Cliente 2">
+            <div>
+                <h3>Jean Paul Fuentes</h3>
+                <p>Muy buena calidad, estoy satisfecho con mi compra.</p>
+                <div class="stars">
+                    <i class="fas fa-star"></i>
+                    <i class="fas fa-star"></i>
+                    <i class="fas fa-star"></i>
+                    <i class="fas fa-star"></i>
+                    <i class="fas fa-star"></i>
+                </div>
+            </div>
+        </div>
+        <div class="review-card">
+            <img src="img/cliente3.jpg" alt="Cliente 3">
+            <div>
+                <h3>César Infante</h3>
+                <p>Rápida entrega y producto en perfectas condiciones.</p>
+                <div class="stars">
+                    <i class="fas fa-star"></i>
+                    <i class="fas fa-star"></i>
+                    <i class="fas fa-star"></i>
+                    <i class="fas fa-star"></i>
+                    <i class="fas fa-star"></i>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="contact-section">
+        <h2>Contáctanos</h2>
+        <form class="contact-form" id="contact-form">
+            <div class="form-group">
+                <label for="nombre">Nombre</label>
+                <input type="text" class="form-control" id="nombre" placeholder="Ingrese su nombre" required>
+            </div>
+            <div class="form-group">
+                <label for="email">Correo Electrónico</label>
+                <input type="email" class="form-control" id="email" placeholder="Ingrese su correo electrónico" required>
+            </div>
+            <div class="form-group">
+                <label for="mensaje">Mensaje</label>
+                <textarea class="form-control" id="mensaje" rows="4" placeholder="Ingrese su mensaje" required></textarea>
+            </div>
+            <button type="submit" class="btn btn-primary">Enviar</button>
+        </form>
+    </div>
+
+    <script>
+        // Función para redirigir a las páginas según el índice
+        function redirectToIndex(index) {
+            if (index === 'index') {
+                window.location.href = 'index.html';
+            } else if (index === 'ropa') {
+                window.location.href = 'index.html';
+            } else if (index === 'calzado') {
+                window.location.href = 'index.html';
+            } else if (index === 'perfume') {
+                window.location.href = 'index.html';
+            }
+        }
+
+        // Manejar la presentación del formulario de contacto
+        document.getElementById('contact-form').addEventListener('submit', function (event) {
+            event.preventDefault();
+            alert('Formulario enviado. ¡Gracias por contactarnos!');
+            this.reset();
+        });
+    </script>
+
+    
+   
+<footer class="footer">
+        <p>&copy; 2024 AntoCloset. Todos los derechos reservados.</p>
+        <ul class="footer-links">
+            <li><a href="#">Política de Privacidad</a></li>
+            <li><a href="#">Términos y Condiciones</a></li>
+        </ul>
+        <div class="social-media">
+            <a href="https://facebook.com/AntoCloset" target="_blank" aria-label="Facebook"><i class="bi bi-facebook"></i></a>
+            <a href="https://twitter.com/AntoCloset" target="_blank" aria-label="Twitter"><i class="bi bi-twitter"></i></a>
+            <a href="https://instagram.com/AntoCloset" target="_blank" aria-label="Instagram"><i class="bi bi-instagram"></i></a>
+            <a href="mailto:contacto@antocloset.com" aria-label="Email"><i class="bi bi-envelope"></i></a>
+        </div>
+        <p>Diseñado y desarrollado por AntoCloset Team.</p>
+</footer>
+</body>
+</html>
+
+
+
+
+
+
+
+
+
