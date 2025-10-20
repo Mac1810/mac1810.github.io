@@ -1,0 +1,143 @@
+/*
+ * 1. Estilos Generales y Fondo de Pantalla
+ */
+body {
+    margin: 0;
+    font-family: 'Montserrat', 'Roboto', 'Open Sans', Arial, sans-serif;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+    color: #f5f5f5;
+    background-image: url('https://media.istockphoto.com/id/1340413200/es/foto/vista-a%C3%A9rea-de-una-subestaci%C3%B3n-de-alta-tensi%C3%B3n.jpg?s=1024x1024&w=is&k=20&c=W3Z25k61iphnSEF-0OdNnHJrCmVBJLKDu22xR65hSLw=');
+    background-size: cover;
+    background-position: center;
+    background-attachment: fixed;
+    transition: background 0.5s ease;
+}
+
+/* Agrega un ligero 'overlay' oscuro para que el texto sea más legible sobre cualquier imagen */
+body::before {
+    content: '';
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(120deg, rgba(30,30,60,0.6) 0%, rgba(0,0,0,0.5) 100%);
+    backdrop-filter: blur(6px);
+    z-index: -1;
+}
+
+
+/*
+ * 2. Estilos del Contenedor Principal y Título
+ */
+.contenedor-principal {
+    width: 92%;
+    max-width: 480px;
+    padding: 32px 24px;
+    text-align: center;
+    background: rgba(40, 40, 60, 0.35);
+    border-radius: 18px;
+    box-shadow: 0 8px 32px rgba(0,0,0,0.25);
+    backdrop-filter: blur(8px);
+    border: 1.5px solid rgba(255,255,255,0.08);
+    transition: box-shadow 0.3s, background 0.3s;
+}
+
+h1 {
+    font-size: 2.7em;
+    margin-bottom: 18px;
+    font-weight: 800;
+    letter-spacing: 2px;
+    color: #f7931e;
+    text-shadow: 0 2px 8px rgba(0,0,0,0.7);
+    transition: color 0.3s;
+}
+.descripcion {
+    font-size: 1.15em;
+    margin-bottom: 32px;
+    color: #f5f5f5;
+    font-weight: 500;
+    text-shadow: 0 1px 4px rgba(0,0,0,0.4);
+    letter-spacing: 0.5px;
+    line-height: 1.5;
+}
+
+
+/*
+ * 3. Estilos de los Botones de Enlace
+ */
+.lista-enlaces {
+    display: flex;
+    flex-direction: column;
+    gap: 18px;
+    margin-bottom: 8px;
+}
+
+.enlace-boton {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 14px 0;
+    background: linear-gradient(90deg, #f7931e 0%, #ffb347 100%);
+    color: #222;
+    text-decoration: none;
+    border-radius: 10px;
+    font-weight: 700;
+    letter-spacing: 1.2px;
+    font-size: 1.08em;
+    box-shadow: 0 4px 16px rgba(0,0,0,0.18);
+    transition: background 0.3s, color 0.3s, transform 0.15s;
+    border: none;
+    outline: none;
+    cursor: pointer;
+    position: relative;
+    overflow: hidden;
+}
+}
+
+.enlace-boton:hover {
+    background: linear-gradient(90deg, #e5820d 0%, #f7931e 100%);
+    color: #fff;
+    transform: scale(1.04) translateY(-2px);
+    box-shadow: 0 8px 24px rgba(0,0,0,0.28);
+}
+}
+
+.enlace-boton i {
+    margin-right: 12px;
+    font-size: 1.25em;
+    vertical-align: middle;
+    transition: color 0.3s, transform 0.2s;
+}
+.enlace-boton span {
+    vertical-align: middle;
+    font-size: 1em;
+}
+@import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700;800&family=Roboto:wght@400;700&family=Open+Sans:wght@400;700&display=swap');
+
+@media (max-width: 600px) {
+    .contenedor-principal {
+        max-width: 98vw;
+        padding: 18px 6px;
+        border-radius: 10px;
+    }
+    h1 {
+        font-size: 2em;
+        margin-bottom: 12px;
+    }
+    .descripcion {
+        font-size: 1em;
+        margin-bottom: 18px;
+    }
+    .enlace-boton {
+        font-size: 0.98em;
+        padding: 12px 0;
+    }
+    .enlace-boton i {
+        font-size: 1.1em;
+        margin-right: 8px;
+    }
+}
